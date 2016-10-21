@@ -57,11 +57,41 @@
 {
    // NSLog(@"The requested Url:%@",request.URL.description);
     
+    if (![self isSignOut:webView]) {
+        
+        if (self.dictUserInfo) {
+            if ([[self.dictUserInfo valueForKey:UNID] length]>0) {
+                
+            }
+        }
+    }
+    
+    
+    
     return YES;
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    // NSLog(@"The did start load Url:%@",webView.request.URL.description);
+     NSLog(@"The did start load Url:%@",webView.request.URL.description);
+    
+    if (![self isSignOut:webView]) {
+        
+        if (self.dictUserInfo) {
+            if ([[self.dictUserInfo valueForKey:UNID] length]>0) {
+                
+                NSArray * cookies = [self.dictUserInfo valueForKey:SAVECOOKIES];
+                
+                
+                [[ NSHTTPCookieStorage sharedHTTPCookieStorage ]
+                 setCookies: cookies forURL:webView.request.URL mainDocumentURL: nil ];
+            }
+            else {
+                
+                [self manupulatedata:webView];
+            }
+        }
+    }
+
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
@@ -77,6 +107,11 @@
         if (self.dictUserInfo) {
             if ([[self.dictUserInfo valueForKey:UNID] length]>0) {
                 
+//                NSArray * cookies = [self.dictUserInfo valueForKey:SAVECOOKIES];
+//                
+//                
+//                [[ NSHTTPCookieStorage sharedHTTPCookieStorage ]
+//                 setCookies: cookies forURL:webView.request.URL mainDocumentURL: nil ];
             }
             else {
                 
