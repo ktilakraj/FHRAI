@@ -235,8 +235,8 @@
 				TargetAttributes = {
 					9EE680A11DBA097900EE1796 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 94J85E8DHR;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 5DVQ92RT5H;
+						ProvisioningStyle = Manual;
 					};
 					9EE680BA1DBA097A00EE1796 = {
 						CreatedOnToolsVersion = 8.0;
@@ -457,12 +457,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 94J85E8DHR;
+				DEVELOPMENT_TEAM = 5DVQ92RT5H;
 				INFOPLIST_FILE = FHRAI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.datamatics.FHRAI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "634d1e0d-03d5-4ac5-b38e-4776ab4a4282";
+				PROVISIONING_PROFILE_SPECIFIER = "Wild card iOS Development";
 			};
 			name = Debug;
 		};
@@ -470,12 +472,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 94J85E8DHR;
+				DEVELOPMENT_TEAM = 5DVQ92RT5H;
 				INFOPLIST_FILE = FHRAI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.datamatics.FHRAI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "634d1e0d-03d5-4ac5-b38e-4776ab4a4282";
+				PROVISIONING_PROFILE_SPECIFIER = "Wild card iOS Development";
 			};
 			name = Release;
 		};
