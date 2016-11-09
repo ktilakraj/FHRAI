@@ -10,9 +10,7 @@
 #import "RMMapper.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
-#define SAVECOOKIES @"SAVECOOKIES"
-#define UNID @"unid"
-#define USERINFO @"UserInfo"
+
 
 @interface ViewController ()<UIWebViewDelegate>
 

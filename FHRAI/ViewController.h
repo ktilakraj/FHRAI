@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#define SAVECOOKIES @"SAVECOOKIES"
+#define UNID @"unid"
+#define USERINFO @"UserInfo"
 
 @interface ViewController : UIViewController
 

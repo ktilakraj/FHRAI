@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -85,18 +87,33 @@
                                stringByReplacingOccurrencesOfString:@">" withString:@""]
                               stringByReplacingOccurrencesOfString: @" " withString: @""];
         
-        NSString *strUrl=[NSString stringWithFormat:@"http://www.fhrai.com/AutoLogin.aspx?UNID=7c29dc2d-1f68-4bdc-8478-b90d4de08520&gcm_id=%@",devToken];
         
-        dispatch_queue_t queue = dispatch_queue_create("com.company.app.queue", DISPATCH_QUEUE_SERIAL);
-        dispatch_async(queue, ^{
-            [self htttpCallWithUrl:[NSURL URLWithString:strUrl]];
-            dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+      NSMutableDictionary *dictUserInfo=[NSMutableDictionary dictionaryWithDictionary:[self getSaveDetails]];
+        
+        if (dictUserInfo) {
+            if ([[dictUserInfo valueForKey:UNID] length]>0) {
                 
-               
-            });
-        });
-        
+                NSString *strUrl=[NSString stringWithFormat:@"http://www.fhrai.com/AutoLogin.aspx?UNID=%@&gcm_id=%@",[dictUserInfo valueForKey:UNID],devToken];
+                dispatch_queue_t queue = dispatch_queue_create("com.company.app.queue", DISPATCH_QUEUE_SERIAL);
+                dispatch_async(queue, ^{
+                    [self htttpCallWithUrl:[NSURL URLWithString:strUrl]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        //Response
+                    });
+                });
+            }
+        }
     }
+}
+
+-(NSDictionary *)getSaveDetails
+{
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    NSDictionary *dict=[defaults rm_customObjectForKey:USERINFO];
+    return dict;
 }
 
 + (BOOL)notificationServicesEnabled {
