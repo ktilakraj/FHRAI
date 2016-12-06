@@ -9,8 +9,11 @@
 #import "AppDelegate.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 #import "ViewController.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate ()
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+@interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
 @end
 
@@ -34,6 +37,16 @@
 
 -(void)activateNotification:(UIApplication*)application
 {
+  
+if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+            if(!error){
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
+        }];
+} else {
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
@@ -52,7 +65,22 @@
      UIRemoteNotificationTypeAlert |
      UIRemoteNotificationTypeSound];
 #endif
+}
     
+}
+
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
+    NSLog(@"User Info : %@",notification.request.content.userInfo);
+    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
+    NSLog(@"User Info : %@",response.notification.request.content.userInfo);
+    
+    [self handleNotificationUserInfo:response.notification.request.content.userInfo];
+    
+    completionHandler();
 }
 
 - (void) handleNotificationUserInfo:(NSDictionary*)userInfo
@@ -91,6 +119,8 @@
         
         
       NSMutableDictionary *dictUserInfo=[NSMutableDictionary dictionaryWithDictionary:[self getSaveDetails]];
+        
+        NSLog(@"the device token is:%@",devToken);
         
         if (dictUserInfo) {
             if ([[dictUserInfo valueForKey:UNID] length]>0) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2316FEA61DF6638900BE1919 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2316FEA51DF6638900BE1919 /* PushKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		9EE680A71DBA097A00EE1796 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE680A61DBA097900EE1796 /* main.m */; };
 		9EE680AA1DBA097A00EE1796 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE680A91DBA097A00EE1796 /* AppDelegate.m */; };
 		9EE680AD1DBA097A00EE1796 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EE680AC1DBA097A00EE1796 /* ViewController.m */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2316FEA51DF6638900BE1919 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
+		23522C391DEFC2EE008411AD /* FHRAI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FHRAI.entitlements; sourceTree = "<group>"; };
 		9EE680A21DBA097900EE1796 /* FHRAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FHRAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EE680A61DBA097900EE1796 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9EE680A81DBA097A00EE1796 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2316FEA61DF6638900BE1919 /* PushKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2316FEA41DF6638900BE1919 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2316FEA51DF6638900BE1919 /* PushKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9EE680991DBA097900EE1796 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +109,7 @@
 				9EE680BE1DBA097A00EE1796 /* FHRAITests */,
 				9EE680C91DBA097A00EE1796 /* FHRAIUITests */,
 				9EE680A31DBA097900EE1796 /* Products */,
+				2316FEA41DF6638900BE1919 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +126,7 @@
 		9EE680A41DBA097900EE1796 /* FHRAI */ = {
 			isa = PBXGroup;
 			children = (
+				23522C391DEFC2EE008411AD /* FHRAI.entitlements */,
 				9EE680D81DBA1A1700EE1796 /* RMMapper */,
 				9EE680A81DBA097A00EE1796 /* AppDelegate.h */,
 				9EE680A91DBA097A00EE1796 /* AppDelegate.m */,
@@ -237,6 +251,14 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 5DVQ92RT5H;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					9EE680BA1DBA097A00EE1796 = {
 						CreatedOnToolsVersion = 8.0;
@@ -457,14 +479,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FHRAI/FHRAI.entitlements;
 				DEVELOPMENT_TEAM = 5DVQ92RT5H;
 				INFOPLIST_FILE = FHRAI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.datamatics.FHRAI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swtya.fhri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "634d1e0d-03d5-4ac5-b38e-4776ab4a4282";
-				PROVISIONING_PROFILE_SPECIFIER = "Wild card iOS Development";
+				PROVISIONING_PROFILE = "d6c7a6e4-e3cd-41ca-8165-856ac14fb7e5";
+				PROVISIONING_PROFILE_SPECIFIER = "Fhri pushenable iOS Development";
 			};
 			name = Debug;
 		};
@@ -472,14 +495,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FHRAI/FHRAI.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 5DVQ92RT5H;
 				INFOPLIST_FILE = FHRAI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.datamatics.FHRAI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swtya.fhri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "634d1e0d-03d5-4ac5-b38e-4776ab4a4282";
-				PROVISIONING_PROFILE_SPECIFIER = "Wild card iOS Development";
+				PROVISIONING_PROFILE = "82f27c31-0eb2-4ab8-a304-6488cf022b3f";
+				PROVISIONING_PROFILE_SPECIFIER = "Fhri pushemable iOS Distribution";
 			};
 			name = Release;
 		};
