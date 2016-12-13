@@ -85,6 +85,11 @@ if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")) {
 
 - (void) handleNotificationUserInfo:(NSDictionary*)userInfo
 {
+    
+    //ViewController
+    
+    ViewController* svc =[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ViewController"];
+    
     [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];
     
     if ( [UIApplication sharedApplication].applicationState == UIApplicationStateActive)
@@ -98,6 +103,29 @@ if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")) {
     {
         //App is not active
         NSLog(@"The notification  Inactive active state");
+        if ([[userInfo valueForKey:@"bundle"] isKindOfClass:[NSArray class]]) {
+            
+            
+            
+            NSArray *arrBundle=[userInfo valueForKey:@"bundle"];
+            NSDictionary *dictBundle =[arrBundle objectAtIndex:0];
+            NSString *strcollapse_key =[dictBundle valueForKey:@"collapse_key"];
+            if ([strcollapse_key.uppercaseString isEqualToString:@"MESSAGE"]) {
+                svc.isFromNotification = YES;
+                
+                [svc setStrWebUrl:@"http://www.fhrai.com/ViewMessages.aspx"];
+                
+            } else {
+                
+                    svc.isFromNotification = YES;
+                
+                   [svc setStrWebUrl:@"http://www.fhrai.com/ViewNotification.html"];
+            }
+            
+            self.window.rootViewController = svc;
+            
+        }
+       
     }
     
 }
@@ -125,7 +153,7 @@ if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")) {
         if (dictUserInfo) {
             if ([[dictUserInfo valueForKey:UNID] length]>0) {
                 
-                NSString *strUrl=[NSString stringWithFormat:@"http://www.fhrai.com/AutoLogin.aspx?UNID=%@&gcm_id=%@",[dictUserInfo valueForKey:UNID],devToken];
+                NSString *strUrl=[NSString stringWithFormat:@"http://www.fhrai.com/AutoLogin.aspx?UNID=%@&gcm_id=%@&type=IOS",[dictUserInfo valueForKey:UNID],devToken];
                 dispatch_queue_t queue = dispatch_queue_create("com.company.app.queue", DISPATCH_QUEUE_SERIAL);
                 dispatch_async(queue, ^{
                     [self htttpCallWithUrl:[NSURL URLWithString:strUrl]];

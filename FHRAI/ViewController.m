@@ -17,12 +17,15 @@
 @property (weak, nonatomic) IBOutlet UIWebView *objWebView;
 @property (strong, nonatomic) NSMutableDictionary *dictUserInfo;
 
+
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     /*
      User: support2@pssinfo.com
      Password: 123456
@@ -41,15 +44,20 @@
         if ([[self.dictUserInfo valueForKey:UNID] length]>0) {
             strUrl=[NSString stringWithFormat:@"http://www.fhrai.com/AutoLogin.aspx?UNID=%@",[self.dictUserInfo valueForKey:UNID]];
             request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:strUrl]];
-            // NSArray * cookies = [self.dictUserInfo valueForKey:SAVECOOKIES];
-            // NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies: cookies];
-            //[request setAllHTTPHeaderFields:headers];
         }
     }
     self.objWebView.delegate=self;
     [self.objWebView loadRequest:request];
+  
 }
 
+
+-(void)loadOtherWebUrlInWebView:(NSString*)strurl
+{
+   NSMutableURLRequest * request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:strurl]];
+    self.objWebView.delegate=self;
+    [self.objWebView loadRequest:request];
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -125,6 +133,13 @@
             
             [self manupulatedata:webView];
         }
+    }
+    
+    
+    if (self.isFromNotification) {
+        
+        [self loadOtherWebUrlInWebView:self.strWebUrl];
+        self.isFromNotification=NO;
     }
 }
 

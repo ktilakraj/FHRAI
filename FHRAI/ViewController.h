@@ -13,6 +13,10 @@
 
 @interface ViewController : UIViewController
 
+@property(nonatomic,assign) BOOL isFromNotification;
+@property (strong, nonatomic) NSString *strWebUrl;
+
+-(void)loadOtherWebUrlInWebView:(NSString*)strurl;
 
 @end
 
